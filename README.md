@@ -13,6 +13,7 @@ HAProxyAPI was written by Steve Kamerman and is distributed under the GNU GPLv3 
 Before you can use HAProxyAPI, you'll need to include the class loader:
 
 ```php
+<?php
 require_once 'lib/Loader.php';
 ```
 
@@ -22,6 +23,7 @@ Then, you'll need to create an `HAProxy_Executor` which is used to run all the c
 Make sure you have the `stats` interface enabled in your HAProxy config.  You will also need `admin` privileges if you want to enable or disable servers.  Currently, authentication is required to use this method.
 
 ```php
+<?php
 // Create a Executor for HTTP
 $exec = new HAProxy_Executor('http://hostname:port/haproxy_stats_url', HAProxy_Executor::HTTP);
 // Set your HAProxy stats page credentials
@@ -39,6 +41,7 @@ global
 To use the UNIX domain socket interface for HAProxy, you pass its full filename to the constructor:
 
 ```php
+<?php
 // Create a Executor for HTTP
 $exec = new HAProxy_Executor('/tmp/haproxy-stats', HAProxy_Executor::SOCKET);
 ```
@@ -55,6 +58,7 @@ If you can access the socket via TCP/IP, you can use HAProxyAPI to connect to it
 For this setup, you use the same socket setup as above, but you pass a hostname and port instead:
 
 ```php
+<?php
 // Create a Executor for HTTP
 $exec = new HAProxy_Executor('localhost:10010', HAProxy_Executor::SOCKET);
 ```
@@ -63,6 +67,7 @@ $exec = new HAProxy_Executor('localhost:10010', HAProxy_Executor::SOCKET);
 To get a statistics object, use `HAProxy_Stats::get($exec)`:
 
 ```php
+<?php
 // Connect
 $exec = new HAProxy_Executor('localhost:10010', HAProxy_Executor::SOCKET);
 // Get stats
@@ -92,6 +97,7 @@ That will output something like this:
 Using this information, you can get statistics about individual servers:
 
 ```php
+<?php
 $server = $stats->getServiceStats('foo-nodes','node01.foobar.com');
 echo "-------------------------------------\n";
 echo "{$server->info->service_name}: {$server->health->status} ({$server->health->check_status} - {$server->health->check_duration}ms )\n";
@@ -161,4 +167,25 @@ HAProxy_Stats_HttpResponseCode Stats:
         http_4xx: 537
         http_5xx: 0
 -------------------------------------
+```
+
+## Enabling/Disabling Servers ##
+You can put servers into maintanence mode (aka disabled mode) and bring them back up using the `HAProxy_Command_DisableServer` and `HAProxy_Command_EnableServer` HAProxyAPI commands.
+
+Both commands take a **backend service name** (ex: `foo-nodes`) and a server name (ex: `node01.foobar.com`).
+
+To execute commands, you pass them to the HAProxy_Executor::execute($command) method:
+
+```php
+<?php
+// Create a Executor for HTTP
+$exec = new HAProxy_Executor('http://hostname:port/haproxy_stats_url', HAProxy_Executor::HTTP);
+// Set your HAProxy stats page credentials
+$exec->setCredentials('username', 'password');
+
+// Disable foo-nodes/node01.foobar.com in the load balancer
+$exec->execute(new HAProxy_Command_DisableServer('foo-nodes', 'node01.foobar.com'));
+
+// Enable foo-nodes/node04.foobar.com
+$exec->execute(new HAProxy_Command_DisableServer('foo-nodes', 'node04.foobar.com'));
 ```
