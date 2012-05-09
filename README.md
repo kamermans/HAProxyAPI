@@ -186,6 +186,42 @@ $exec->setCredentials('username', 'password');
 // Disable foo-nodes/node01.foobar.com in the load balancer
 $exec->execute(new HAProxy_Command_DisableServer('foo-nodes', 'node01.foobar.com'));
 
-// Enable foo-nodes/node04.foobar.com
-$exec->execute(new HAProxy_Command_DisableServer('foo-nodes', 'node04.foobar.com'));
+// Show stats - you can see node01 is down
+echo HAProxy_Stats::get($exec)->dumpServiceTree();
+/*
++- foo-service
+|  +- FRONTEND (OPEN)
+|
++- foo-nodes
+|  +- node01.foobar.com (MAINT)
+|  +- node02.foobar.com (UP)
+|  +- node03.foobar.com (UP)
+|  +- node04.foobar.com (UP)
+|  +- BACKEND (UP)
+|
++- stats
+|  +- FRONTEND (OPEN)
+|  +- BACKEND (UP)
+*/
+
+// Enable foo-nodes/node01.foobar.com
+$exec->execute(new HAProxy_Command_EnableServer('foo-nodes', 'node01.foobar.com'));
+
+// Show stats - you can see node01 is coming up
+echo HAProxy_Stats::get($exec)->dumpServiceTree();
+/*
++- foo-service
+|  +- FRONTEND (OPEN)
+|
++- foo-nodes
+|  +- node01.foobar.com (UP 1/3)
+|  +- node02.foobar.com (UP)
+|  +- node03.foobar.com (UP)
+|  +- node04.foobar.com (UP)
+|  +- BACKEND (UP)
+|
++- stats
+|  +- FRONTEND (OPEN)
+|  +- BACKEND (UP)
+*/
 ```
