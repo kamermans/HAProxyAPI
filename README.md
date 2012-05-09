@@ -172,7 +172,7 @@ HAProxy_Stats_HttpResponseCode Stats:
 ## Enabling/Disabling Servers ##
 You can put servers into maintanence mode (aka disabled mode) and bring them back up using the `HAProxy_Command_DisableServer` and `HAProxy_Command_EnableServer` HAProxyAPI commands.
 
-Both commands take a **backend service name** (ex: `foo-nodes`) and a server name (ex: `node01.foobar.com`).
+Both commands take a **backend service name** (ex: `foo-nodes`) and a **server name** (ex: `node01.foobar.com`).
 
 To execute commands, you pass them to the HAProxy_Executor::execute($command) method:
 
