@@ -154,6 +154,11 @@ class HAProxy_Stats {
 		return $this->proxy_tree;
 	}
 	
+	/**
+	 * Gets statistics using the given executor
+	 * @param HAProxy_Executor $exec
+	 * @return HAProxy_Stats
+	 */
 	public static function get(HAProxy_Executor $exec) {
 		$stats = new HAProxy_Stats();
 		$stats->setFromStatsString($exec->execute(new HAProxy_Command_Stats()));
