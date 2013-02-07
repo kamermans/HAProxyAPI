@@ -2,6 +2,7 @@
     "name": "kamermans/haproxy-api",
     "description": "PHP API for HAProxy administration",
     "type": "library",
+    "license": "GPLv3",
     "keywords": [
         "haproxy"
     ],
