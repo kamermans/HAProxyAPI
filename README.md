@@ -1,5 +1,7 @@
 # HAProxyAPI #
 ## PHP API for HAProxy administration ##
+[![Build Status](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME].png)](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME])
+
 
 This PHP API lets you programatically access HAProxy for both admin and read-only commands like enabling/disabling servers, and checking the status of servers.  I can communicate via HAProxy over the builtin HTTP **stats web page**, using the built-in **UNIX domain socket**, or over **TCP** if, for example, you are proxying your domain socket to a TCP socket so you can access it remotely.
 
