@@ -102,7 +102,7 @@ class Stats {
 	 * Gets statistics for an individual service
 	 * @param string $backend Backend name
 	 * @param string $server Server name
-	 * @return Stats\Service
+	 * @return HAProxy\Stats\Service
 	 * @throws Exception
 	 * @see getBackendNames()
 	 * @see getServerNames()
@@ -163,7 +163,7 @@ class Stats {
 	/**
 	 * Gets statistics using the given executor
 	 * @param Executor $exec
-	 * @return Stats
+	 * @return HAProxy\Stats
 	 */
 	public static function get(Executor $exec) {
 		$stats = new Stats();

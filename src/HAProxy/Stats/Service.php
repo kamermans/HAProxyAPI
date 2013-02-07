@@ -99,6 +99,10 @@ class Service {
 		$this->http_response_code = new HttpResponseCode($line);
 	}
 	
+	/**
+	 * Returns a string with all the properties of this service
+	 * @return string
+	 */
 	public function dump() {
 		$out = '';
 		$out .= $this->info->dump();
