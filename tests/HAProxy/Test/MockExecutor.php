@@ -3,6 +3,7 @@
 namespace HAProxy\Test;
 
 use HAProxy\Command\Base;
+use HAProxy\Stats\Base as StatUtil;
 use HAProxy\Executor;
 
 class MockExecutor extends Executor {
@@ -12,7 +13,7 @@ class MockExecutor extends Executor {
 	}
 	
 	protected function executeSocket(Base $command) {
-		$type = end(explode('\\', get_class($command)));
+		$type = StatUtil::stripNamespaces($command);
 		switch ($type) {
 			case 'Stats':
 				return $this->getMockStatsData();

@@ -63,10 +63,22 @@ abstract class Base {
 	}
 	
 	public static function getNiceName() {
-		return end(explode('\\', self::getClassName()));
+		return self::stripNamespaces(self::getClassName());
 	}
 	
 	protected static function getClassName() {
 		return get_called_class();
 	}
+										
+	/**
+	 * Returns the class "\foo\bar\is\cool" without its namespaces, so like "cool"
+	 * @param string|object $class
+	 * @return string
+	 */
+	public static function stripNamespaces($class) {
+		$class_name = is_string($class)? $class: get_class($class);
+		$parts = explode('\\', $class_name);
+		return array_pop($parts);
+	}
+	
 }
