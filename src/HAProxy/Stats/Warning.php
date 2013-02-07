@@ -34,10 +34,6 @@ class Warning extends Base {
 		'wredis' => 'redispatches',
 	);
 	
-	public function __construct($line) {
-		parent::__construct($line);
-	}
-	
 	/**
 	 * retries (warning)
 	 * @var string

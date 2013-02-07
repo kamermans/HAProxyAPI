@@ -34,10 +34,6 @@ class Bytes extends Base {
 		'bout' => 'out',
 	);
 	
-	public function __construct($line) {
-		parent::__construct($line);
-	}
-	
 	/**
 	 * inbound traffic in bytes
 	 * @var string

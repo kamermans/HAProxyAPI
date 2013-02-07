@@ -33,6 +33,7 @@ class Abort extends Base {
 		'cli_abrt' => 'client',
 		'srv_abrt' => 'server',
 	);
+	
 	/**
 	 * number of data transfers aborted by the client
 	 * @var string

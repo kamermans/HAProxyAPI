@@ -35,10 +35,6 @@ class Error extends Base {
 		'econ' => 'connections',
 	);
 	
-	public function __construct($line) {
-		parent::__construct($line);
-	}
-	
 	/**
 	 * request errors
 	 * @var string

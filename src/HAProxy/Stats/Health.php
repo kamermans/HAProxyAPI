@@ -47,10 +47,6 @@ class Health extends Base {
 		'hanafail' => 'check_fail_details',
 	);
 	
-	public function __construct($line) {
-		parent::__construct($line);
-	}
-	
 	/**
 	 * status (UP/DOWN/NOLB/MAINT/MAINT(via)...)
 	 * @var string

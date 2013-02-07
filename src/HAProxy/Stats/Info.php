@@ -46,10 +46,6 @@ class Info extends Base {
 		'type' => 'type',
 	);
 	
-	public function __construct($line) {
-		parent::__construct($line);
-	}
-	
 	/**
 	 * type of service (0=frontend, 1=backend, 2=server, 3=socket)
 	 * @var string

@@ -34,10 +34,6 @@ class Denied extends Base {
 		'dresp' => 'responses',
 	);
 	
-	public function __construct($line) {
-		parent::__construct($line);
-	}
-	
 	/**
 	 * denied requests
 	 * @var string

@@ -36,10 +36,6 @@ class Session extends Base {
 		'slim' => 'limit',
 	);
 	
-	public function __construct($line) {
-		parent::__construct($line);
-	}
-	
 	/**
 	 * current sessions
 	 * @var string
