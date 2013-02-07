@@ -96,14 +96,13 @@ class Executor {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data_model->data));
 		}
 		$response = curl_exec($ch);
-//echo "Request: ".var_export(array('url'=>$url,'post'=>http_build_query($data_model->data)), true)."\n";
+		//echo "Request: ".var_export(array('url'=>$url,'post'=>http_build_query($data_model->data)), true)."\n";
 		$curl_errno = curl_errno($ch);
 		$curl_error = curl_error($ch);
 		curl_close($ch);
 		if ($curl_errno !== 0) {
 			throw new Exception("Unable to contact server: cURL Error: $curl_error");
 		}
-//echo "Response: \n$response";
 		return $response;
 	}
 	
