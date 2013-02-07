@@ -61,9 +61,11 @@ abstract class Base {
 		}
 		return $out;
 	}
+	
 	public static function getNiceName() {
-		return basename(self::getClassName());
+		return end(explode('\\', self::getClassName()));
 	}
+	
 	protected static function getClassName() {
 		return get_called_class();
 	}

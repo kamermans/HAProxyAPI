@@ -12,9 +12,13 @@ class MockExecutor extends Executor {
 	}
 	
 	protected function executeSocket(Base $command) {
-		switch (basename(get_class($command))) {
+		$type = end(explode('\\', get_class($command)));
+		switch ($type) {
 			case 'Stats':
 				return $this->getMockStatsData();
+				break;
+			default:
+				throw new \HAProxy\Exception("Unable to execute command, type unknown: $type");
 				break;
 		}
 	}
