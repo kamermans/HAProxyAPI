@@ -10,14 +10,14 @@ HAProxyAPI was written by Steve Kamerman and is distributed under the GNU GPLv3 
 ----------
 
 # Getting Started #
-Before you can use HAProxyAPI, you'll need to include the class loader:
+Before you can use HAProxyAPI, you'll need to include the class loader.  The API is PSR-0 compliant and has builtin Composer support.  If you don't know what that means, you probably just want to use the included class loader, `autoload.php`:
 
 ```php
 <?php
-require_once 'lib/Loader.php';
+require_once 'autoload.php';
 ```
 
-Then, you'll need to create an `HAProxy_Executor` which is used to run all the commands.
+Then, you'll need to create an `HAProxy\Executor` which is used to run all the commands.
 
 ## Connecting to HAProxy via HTTP ##
 Make sure you have the `stats` interface enabled in your HAProxy config.  You will also need `admin` privileges if you want to enable or disable servers.  Currently, authentication is required to use this method.
@@ -25,7 +25,7 @@ Make sure you have the `stats` interface enabled in your HAProxy config.  You wi
 ```php
 <?php
 // Create a Executor for HTTP
-$exec = new HAProxy_Executor('http://hostname:port/haproxy_stats_url', HAProxy_Executor::HTTP);
+$exec = new HAProxy\Executor('http://hostname:port/haproxy_stats_url', HAProxy\Executor::HTTP);
 // Set your HAProxy stats page credentials
 $exec->setCredentials('username', 'password');
 ```
@@ -43,7 +43,7 @@ To use the UNIX domain socket interface for HAProxy, you pass its full filename 
 ```php
 <?php
 // Create a Executor for HTTP
-$exec = new HAProxy_Executor('/tmp/haproxy-stats', HAProxy_Executor::SOCKET);
+$exec = new HAProxy\Executor('/tmp/haproxy-stats', HAProxy\Executor::SOCKET);
 ```
 
 ## Connecting to HAProxy via TCP/IP ##
@@ -60,18 +60,18 @@ For this setup, you use the same socket setup as above, but you pass a hostname 
 ```php
 <?php
 // Create a Executor for HTTP
-$exec = new HAProxy_Executor('localhost:10010', HAProxy_Executor::SOCKET);
+$exec = new HAProxy\Executor('localhost:10010', HAProxy\Executor::SOCKET);
 ```
 
 ## Getting Statistics ##
-To get a statistics object, use `HAProxy_Stats::get($exec)`:
+To get a statistics object, use `HAProxy\Stats::get($exec)`:
 
 ```php
 <?php
 // Connect
-$exec = new HAProxy_Executor('localhost:10010', HAProxy_Executor::SOCKET);
+$exec = new HAProxy\Executor('localhost:10010', HAProxy\Executor::SOCKET);
 // Get stats
-$stats = HAProxy_Stats::get($exec);
+$stats = HAProxy\Stats::get($exec);
 // Show a tree of the backends, frontends and servers
 echo $stats->dumpServiceTree();
 ```
@@ -112,7 +112,7 @@ Output:
 -------------------------------------
 node01.foobar.com: UP (L7OK - 4ms )
 -------------------------------------
-HAProxy_Stats_Info Stats:
+Info Stats:
         proxy_name: foo-nodes
         service_name: node01.foobar.com
         weight: 1
@@ -121,7 +121,7 @@ HAProxy_Stats_Info Stats:
         service_id: 1
         tracked:
         type: 2
-HAProxy_Stats_Health Stats:
+Health Stats:
         status: UP
         active: 1
         backup: 0
@@ -135,32 +135,32 @@ HAProxy_Stats_Health Stats:
         check_code: 200
         check_duration: 4
         check_fail_details: 0
-HAProxy_Stats_Queue Stats:
+Queue Stats:
         current: 0
         max: 0
         limit:
-HAProxy_Stats_Session Stats:
+Session Stats:
         current: 0
         max: 26
         limit:
-HAProxy_Stats_Bytes Stats:
+Bytes Stats:
         in: 697255098
         out: 598278314
-HAProxy_Stats_Rate Stats:
+Rate Stats:
         current: 0
         max: 49
         limit:
-HAProxy_Stats_Denied Stats:
+Denied Stats:
         requests:
         responses: 0
-HAProxy_Stats_Error Stats:
+Error Stats:
         requests:
         responses: 0
         connections: 2
-HAProxy_Stats_Warning Stats:
+Warning Stats:
         retries: 151
         redispatches: 23
-HAProxy_Stats_HttpResponseCode Stats:
+HttpResponseCode Stats:
         http_1xx: 0
         http_2xx: 1308874
         http_3xx: 0
@@ -170,24 +170,24 @@ HAProxy_Stats_HttpResponseCode Stats:
 ```
 
 ## Enabling/Disabling Servers ##
-You can put servers into maintanence mode (aka disabled mode) and bring them back up using the `HAProxy_Command_DisableServer` and `HAProxy_Command_EnableServer` HAProxyAPI commands.
+You can put servers into maintanence mode (aka disabled mode) and bring them back up using the `HAProxy\Command\DisableServer` and `HAProxy\Command\EnableServer` HAProxyAPI commands.
 
 Both commands take a **backend service name** (ex: `foo-nodes`) and a **server name** (ex: `node01.foobar.com`).
 
-To execute commands, you pass them to the HAProxy_Executor::execute($command) method:
+To execute commands, you pass them to the `HAProxy\Executor::execute($command)` method:
 
 ```php
 <?php
 // Create a Executor for HTTP
-$exec = new HAProxy_Executor('http://hostname:port/haproxy_stats_url', HAProxy_Executor::HTTP);
+$exec = new HAProxy\Executor('http://hostname:port/haproxy_stats_url', HAProxy\Executor::HTTP);
 // Set your HAProxy stats page credentials
 $exec->setCredentials('username', 'password');
 
 // Disable foo-nodes/node01.foobar.com in the load balancer
-$exec->execute(new HAProxy_Command_DisableServer('foo-nodes', 'node01.foobar.com'));
+$exec->execute(new HAProxy\Command\DisableServer('foo-nodes', 'node01.foobar.com'));
 
 // Show stats - you can see node01 is down
-echo HAProxy_Stats::get($exec)->dumpServiceTree();
+echo HAProxy\Stats::get($exec)->dumpServiceTree();
 /*
 +- foo-service
 |  +- FRONTEND (OPEN)
@@ -205,10 +205,10 @@ echo HAProxy_Stats::get($exec)->dumpServiceTree();
 */
 
 // Enable foo-nodes/node01.foobar.com
-$exec->execute(new HAProxy_Command_EnableServer('foo-nodes', 'node01.foobar.com'));
+$exec->execute(new HAProxy\Command\EnableServer('foo-nodes', 'node01.foobar.com'));
 
 // Show stats - you can see node01 is coming up
-echo HAProxy_Stats::get($exec)->dumpServiceTree();
+echo HAProxy\Stats::get($exec)->dumpServiceTree();
 /*
 +- foo-service
 |  +- FRONTEND (OPEN)
