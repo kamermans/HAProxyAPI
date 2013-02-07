@@ -14,6 +14,11 @@ class StatsTest extends \PHPUnit_Framework_TestCase {
 	
 	public function testStatsInstantiate() {
 		$stats = Stats::get($this->exec);
+		
+		$tree = $stats->getTree();
+		$backends = implode(';', array_keys($tree));
+		$this->assertEquals('production-proxy;production-nodes;stats', $backends);
+		
 		$server = $stats->getServiceStats('production-nodes','node03.example.com');
 		
 		$this->assertInstanceOf('HAProxy\\Stats\\Info', $server->info);
