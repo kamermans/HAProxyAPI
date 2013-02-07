@@ -35,6 +35,11 @@ class Session extends Base {
 		'smax' => 'max',
 		'slim' => 'limit',
 	);
+	
+	public function __construct($line) {
+		parent::__construct($line);
+	}
+	
 	/**
 	 * current sessions
 	 * @var string

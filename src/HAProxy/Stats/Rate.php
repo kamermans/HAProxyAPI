@@ -34,6 +34,11 @@ class Rate extends Base {
 		'rate_max' => 'max',
 		'rate_lim' => 'limit',
 	);
+	
+	public function __construct($line) {
+		parent::__construct($line);
+	}
+	
 	/**
 	 * number of sessions per second over last elapsed second
 	 * @var string

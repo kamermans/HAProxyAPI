@@ -34,6 +34,11 @@ class Queue extends Base {
 		'qmax' => 'max',
 		'qlimit' => 'limit',
 	);
+	
+	public function __construct($line) {
+		parent::__construct($line);
+	}
+	
 	/**
 	 * current queued requests
 	 * @var string

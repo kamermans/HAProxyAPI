@@ -34,6 +34,11 @@ class Error extends Base {
 		'eresp' => 'responses',
 		'econ' => 'connections',
 	);
+	
+	public function __construct($line) {
+		parent::__construct($line);
+	}
+	
 	/**
 	 * request errors
 	 * @var string

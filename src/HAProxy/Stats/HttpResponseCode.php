@@ -36,6 +36,11 @@ class HttpResponseCode extends Base {
 		'hrsp_4xx' => 'http_4xx',
 		'hrsp_5xx' => 'http_5xx',
 	);
+	
+	public function __construct($line) {
+		parent::__construct($line);
+	}
+	
 	/**
 	 * number of HTTP 1xx (Informational) responses sent
 	 * @var string
