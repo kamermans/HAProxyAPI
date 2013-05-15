@@ -1,0 +1,8 @@
+setup:
+	composer:
+		action: "install"
+
+test:
+	php_unit:
+		config:
+			- "phpunit.xml.dist"
