@@ -7,7 +7,7 @@ test:
         config:
             - "phpunit.xml.dist"
         directory: 
-	    - "tests/"
+            - "tests/"
 
     php_mess_detector:
         allow_failures: true
