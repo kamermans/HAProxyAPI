@@ -6,14 +6,6 @@ test:
     php_unit:
         config:
             - "phpunit.xml.dist"
-        directory: 
-            - "tests/"
-
-    php_mess_detector:
-        allow_failures: true
-
-    php_code_sniffer:
-        standard: "PSR2"
 
     php_cpd:
         allow_failures: true
