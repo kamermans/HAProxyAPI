@@ -102,7 +102,7 @@ class Stats {
 	 * Gets statistics for an individual service
 	 * @param string $backend Backend name
 	 * @param string $server Server name
-	 * @return HAProxy\Stats\Service
+	 * @return Stats\Service
 	 * @throws Exception
 	 * @see getBackendNames()
 	 * @see getServerNames()
@@ -133,6 +133,7 @@ class Stats {
 	 */
 	public function getServerNames($backend) {
 		if (!$this->backendExists($backend)) throw new Exception("Backend does not exist: $backend");
+		$list = array();
 		foreach ($this->proxy_tree[$backend] as $name => $obj) {
 			$list[] = $name;
 		}
@@ -163,7 +164,7 @@ class Stats {
 	/**
 	 * Gets statistics using the given executor
 	 * @param Executor $exec
-	 * @return HAProxy\Stats
+	 * @return Stats
 	 */
 	public static function get(Executor $exec) {
 		$stats = new Stats();

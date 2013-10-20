@@ -28,7 +28,6 @@
 
 namespace HAProxy;
 
-use HAProxy\Stats\LineCollection;
 use HAProxy\Command\Base;
 
 class Executor {

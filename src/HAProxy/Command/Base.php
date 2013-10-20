@@ -54,7 +54,7 @@ class Base {
 		$response_lines = preg_split('/[\n\r]+/', $response);
 		$http_code = $this->getHttpCode($response_lines);
 		if ($http_code >= 400) {
-			throw new HAProxy\Exception("Server responded with HTTP $http_code");
+			throw new \HAProxy\Exception("Server responded with HTTP $http_code");
 		}
 		return $this->getResponseMessage($response_lines);
 	}

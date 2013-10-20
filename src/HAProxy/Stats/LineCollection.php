@@ -78,12 +78,13 @@ class LineCollection implements \Iterator {
 	}
 	
 	public function __toString() {
-		$this->dump();
+		return $this->dump();
 	}
 	
 	public function dump() {
 		$out = array();
 		foreach ($this->lines as $line_num => $line) {
+			/* @var $line Line */
 			$out[] = $line->getAssoc();
 		}
 		return var_export($out, true);

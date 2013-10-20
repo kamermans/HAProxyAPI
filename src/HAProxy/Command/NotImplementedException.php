@@ -28,7 +28,7 @@
 
 namespace HAProxy\Command;
 
-class NotImplementedException extends HAProxy\Exception {
+class NotImplementedException extends \HAProxy\Exception {
 	public function __construct() {
 		parent::__construct();
 	}
