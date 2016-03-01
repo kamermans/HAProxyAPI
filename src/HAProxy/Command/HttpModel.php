@@ -3,11 +3,11 @@
  * HAProxyAPI is a PHP API to access/administrate HAProxy via
  * UNIX Sockets, TCP Sockets and/or the HAProxy HTTP interface.
  * 
- * HAProxyAPI was written by Steve Kamerman, 2012 and is distributed
+ * HAProxyAPI was written by Steve Kamerman, 2016 and is distributed
  * via GitHub at https://github.com/kamermans/HAProxyAPI
  * 
  *  @author Steve Kamerman
- *  @copyright Steve Kamerman, 2012
+ *  @copyright Steve Kamerman, 2016
  *  @license GNU GPLv3
  * 
  * This file is part of HAProxyAPI.
