@@ -1,6 +1,6 @@
 <?php
 
-namespace HAProxy\Test;
+namespace HAProxy;
 
 use HAProxy\Command\Base;
 use HAProxy\Stats\Base as StatUtil;

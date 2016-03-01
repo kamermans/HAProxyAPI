@@ -13,7 +13,7 @@
 >
     <testsuites>
         <testsuite name="HAProxy API Test Suite">
-            <directory suffix="Test.php">./tests/HAProxy/Test</directory>
+            <directory suffix="Test.php">./tests/HAProxy</directory>
         </testsuite>
     </testsuites>
     <logging>

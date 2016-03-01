@@ -1,8 +1,6 @@
 <?php
 
-namespace HAProxy\Test;
-
-use HAProxy\Stats;
+namespace HAProxy;
 
 class StatsTest extends \PHPUnit_Framework_TestCase {
 	
@@ -65,3 +63,4 @@ class StatsTest extends \PHPUnit_Framework_TestCase {
 		$this->exec = null;
 	}
 }
+
