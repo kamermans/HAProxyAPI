@@ -1,4 +1,8 @@
+sudo: required
 language: php
+
+services:
+  - docker
 
 php:
   - 5.6
@@ -11,9 +15,5 @@ install:
   - composer install
 
 script:
-  - mkdir -p build/logs
-  - php vendor/bin/phpunit
-
-after_script:
-  - php vendor/bin/coveralls -v
-
+  - php vendor/bin/phpunit -v
+  - tests/resources/run_functional_tests.sh
