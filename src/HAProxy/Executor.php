@@ -107,16 +107,16 @@ class Executor {
 	
 	protected function openSocket() {
 		if (strpos($this->connection_string, ':')) {
-			// TCP Socket
-			$this->socket = stream_socket_client('tcp://'.$this->connection_string, $errorno, $errorstr);
+			// TCP Socket, @ to hide warnings.
+			$this->socket = @stream_socket_client('tcp://'.$this->connection_string, $errorno, $errorstr);
 		} else if (@filetype(realpath($this->connection_string)) == 'socket') {
-			// UNIX Domain Socket
-			$this->socket = stream_socket_client('unix://'.realpath($this->connection_string), $errorno, $errorstr);
+			// UNIX Domain Socket, @ to hide warnings.
+			$this->socket = @stream_socket_client('unix://'.realpath($this->connection_string), $errorno, $errorstr);
 		} else {
 			throw new Exception("Could not open a connection to \"$this->connection_string\": the connection string is invalid");
 		}
 		if (!$this->socket) {
-			throw new Exception("Could not open a connection to \"$this->connection_string\": $errstr ($errno)");
+			throw new Exception("Could not open a connection to \"$this->connection_string\": $errorstr ($errorno)");
 		}
 	}
 	
