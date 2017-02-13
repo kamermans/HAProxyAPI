@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
-HAPROXY_VERSIONS="1.4 1.5 1.6"
-PHP_VERSIONS="php:5.6-cli php:7.0-cli diegomarangoni/hhvm:cli"
+HAPROXY_VERSIONS="1.4 1.5 1.6 1.7"
+PHP_VERSIONS="php:5.6-cli php:7.0-cli php:7.1-cli diegomarangoni/hhvm:cli"
 
 kill_and_remove() {
     CONTAINER="$1"
