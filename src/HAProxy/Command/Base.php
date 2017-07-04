@@ -35,6 +35,8 @@ class Base {
 		'NONE' => 'Nothing has changed.',
 		'EXCD' => 'Action not processed: the buffer couldn\'t store all the data. You should retry with less servers at a time.',
 		'DENY' => 'Action denied.',
+		'ERRP' => 'Invalid parameters.',
+		'PART' => 'Action was only partially successful.',
 		'UNKN' => 'Unexpected error.'
 	);
 	
@@ -72,7 +74,7 @@ class Base {
 	protected function getResponseMessage($response_lines) {
 		//var_export($response_lines);
 		foreach ($response_lines as $line) {
-			if (preg_match('/^[Ll]ocation.+;st=(DONE|NONE|EXCD|DENY|UNKN)/', $line, $matches)) {
+			if (preg_match('/^[Ll]ocation.+;st=(DONE|NONE|EXCD|DENY|UNKN|PART|ERRP)/', $line, $matches)) {
 				return $this->response_map[$matches[1]];
 			}
 		}
